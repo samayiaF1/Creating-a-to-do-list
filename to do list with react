@@ -1,0 +1,223 @@
+yarn create react-app todo-list
+import React from 'react';
+ 
+import Header from "./Header";
+ 
+import './App.css';
+ 
+function App() {
+ return (
+   <div className="App">
+     <Header />
+   </div>
+ );
+}
+ 
+export default App;
+[{
+   "id": 1,
+   "task": "Give dog a bath",
+   "complete": true
+ }, {
+   "id": 2,
+   "task": "Do laundry",
+   "complete": true
+ }, {
+   "id": 3,
+   "task": "Vacuum floor",
+   "complete": false
+ }, {
+   "id": 4,
+   "task": "Feed cat",
+   "complete": true
+ }, {
+   "id": 5,
+   "task": "Change light bulbs",
+   "complete": false
+ }, {
+   "id": 6,
+   "task": "Go to Store",
+   "complete": true
+ }, {
+   "id": 7,
+   "task": "Fill gas tank",
+      "complete": true
+ }, {
+   "id": 8,
+   "task": "Change linens",
+   "complete": false
+ }, {
+   "id": 9,
+   "task": "Rake leaves",
+   "complete": true
+ }, {
+   "id": 10,
+   "task": "Bake Cookies",
+   "complete": false
+ }, {
+   "id": 11,
+   "task": "Take nap",
+   "complete": true
+ }, {
+   "id": 12,
+   "task": "Read book",
+   "complete": true
+ }, {
+   "id": 13,
+   "task": "Exercise",
+   "complete": false
+ }, {
+   "id": 14,
+   "task": "Give dog a bath",
+   "complete": false
+ }, {
+   "id": 15,
+   "task": "Do laundry",
+   "complete": false
+ }, {
+   "id": 16,
+   "task": "Vacuum floor",
+   "complete": false
+ }, {
+   "id": 17,
+   "task": "Feed cat",
+   "complete": true
+ }, {
+   "id": 18,
+   "task": "Change light bulbs",
+   "complete": false
+ }, {
+   "id": 19,
+   "task": "Go to Store",
+   "complete": false
+ }, {
+   "id": 20,
+   "task": "Fill gas tank",
+   "complete": false
+ }]
+const [ variable, setVariable ] = useState(<initState?>);
+import React, { useState } from 'react';
+import data from "./data.json";
+//components
+import Header from "./Header";
+ 
+import './App.css';
+ 
+function App() {
+  const [ toDoList, setToDoList ] = useState(data);
+ 
+ 
+ return (
+   <div className="App">
+     <Header />
+   </div>
+ );
+}
+ 
+export default App;
+import React, { useState } from 'react';
+import data from "./data.json";
+//components
+import Header from "./Header";
+import ToDoList from "./ToDoList";
+ 
+import './App.css';
+ 
+function App() {
+  const [ toDoList, setToDoList ] = useState(data);
+ 
+ 
+ return (
+   <div className="App">
+     <Header />
+     <ToDoList toDoList={toDoList}/>
+   </div>
+ );
+}
+ 
+export default App;
+import React from 'react';
+import ToDo from './ToDo';
+ 
+ 
+const ToDoList = ({toDoList}) => {
+   return (
+       <div>
+           {toDoList.map(todo => {
+               return (
+                   <ToDo todo={todo} />
+               )
+           })}
+       </div>
+   );
+};
+ 
+export default ToDoList;
+import React from 'react';
+ 
+const ToDo = ({todo}) => {
+   return (
+       <div>
+           {todo.task}
+       </div>
+   );
+};
+ 
+export default ToDo;
+ const ToDo = ({todo}) => {
+   return (
+       <div className={todo.complete ? "strike" : ""}>
+           {todo.task}
+       </div>
+   );
+};
+.strike {
+   text-decoration: line-through;
+}
+ const handleToggle = (id) => {
+   let mapped = toDoList.map(task => {
+     return task.id == id ? { ...task, complete: !task.complete } : { ...task};
+   });
+   setToDoList(mapped);
+ }
+ const handleFilter = () => {
+   let filtered = toDoList.filter(task => {
+     return !task.complete;
+   });
+   setToDoList(filtered);
+ }
+ import React from 'react';
+import ToDo from './ToDo';
+ 
+const ToDoList = ({toDoList, handleToggle, handleFilter}) => {
+   return (
+       <div>
+           {toDoList.map(todo => {
+               return (
+                   <ToDo todo={todo} handleToggle={handleToggle} handleFilter={handleFilter}/>
+               )
+           })}
+           <button style={{margin: '20px'}} onClick={handleFilter}>Clear Completed</button>
+       </div>
+   );
+};
+ 
+export default ToDoList;
+const [ userInput, setUserInput ] = useState('');
+<input value={userInput} type="text" onChange={handleChange} placeholder="Enter task..."/>
+const handleChange = (e) => {
+       setUserInput(e.currentTarget.value)
+   }
+   const handleSubmit = (e) => {
+       e.preventDefault();
+       addTask(userInput);
+       setUserInput(“”);
+ 
+   }
+   const addTask = (userInput) => {
+   let copy = [...toDoList];
+   copy = [...copy, { id: toDoList.length + 1, task: userInput, complete: false }];
+   setToDoList(copy);
+ }
+ copy.push({id: toDoList.length + 1, task: userInput, complete: false });
+ 
